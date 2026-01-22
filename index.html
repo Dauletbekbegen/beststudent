@@ -21,152 +21,73 @@
             background: var(--bg);
             margin: 0;
             min-height: 100vh;
-            color: #333;
-            padding-bottom: 50px;
+            display: flex; flex-direction: column; color: #333;
         }
 
-        /* --- STICKY HEADER --- */
+        /* --- HEADER & NAV --- */
         .sticky-wrapper {
             position: sticky; top: 0; z-index: 1000;
             background: rgba(255, 255, 255, 0.98);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            backdrop-filter: blur(5px);
-            width: 100%;
+            backdrop-filter: blur(5px); width: 100%;
         }
-
-        .header-top {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .timer-box {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1rem; font-weight: 700;
-            color: var(--white); background: var(--primary);
-            padding: 5px 10px; border-radius: 8px;
-        }
+        .header-top { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid #eee; }
+        .timer-box { font-family: 'Roboto Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--white); background: var(--primary); padding: 5px 10px; border-radius: 8px; }
         .timer-warning-yellow { background: var(--warning); }
         .timer-warning-red { background: var(--danger); animation: pulse 1s infinite; }
-
-        /* ПРОГРЕСС ЖОЛАҒЫ */
-        .progress-container {
-            width: 100%; height: 4px; background: #eee;
-        }
-        .progress-bar {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--success), var(--primary));
-            transition: width 0.3s ease;
-        }
-
-        /* --- СҰРАҚТАР НАВИГАТОРЫ (2 ҚАТАРЛЫ) --- */
-        .nav-scroller {
-            display: flex;
-            flex-wrap: wrap; /* Сандарды келесі жолға түсіру */
-            justify-content: flex-start; /* Сол жақтан бастау */
-            padding: 10px;
-            gap: 8px;
-            
-            /* БИІКТІКТІ ШЕКТЕУ: Шамамен 2 қатар көрінеді, қалғаны скролл болады */
-            max-height: 95px; 
-            overflow-y: auto; /* Тігінен (астыға) скролл жасау */
-            
-            background: #fff;
-            border-bottom: 1px solid #eee;
-        }
-
-        /* Навигатордың скролл жолағын әдемілеу */
+        .progress-container { width: 100%; height: 4px; background: #eee; }
+        .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--success), var(--primary)); transition: width 0.3s ease; }
+        .nav-scroller { display: flex; flex-wrap: wrap; justify-content: flex-start; padding: 10px; gap: 8px; max-height: 95px; overflow-y: auto; background: #fff; border-bottom: 1px solid #eee; }
         .nav-scroller::-webkit-scrollbar { width: 4px; }
         .nav-scroller::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .nav-item { flex: 0 0 auto; width: 35px; height: 35px; display: flex; justify-content: center; align-items: center; background: #f1f2f6; color: #636e72; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+        .nav-item.answered { background: var(--primary); color: white; box-shadow: 0 2px 5px rgba(78, 84, 200, 0.4); }
+        .nav-item.missed { border-color: var(--danger); color: var(--danger); background: #fff; }
 
-        .nav-item {
-            flex: 0 0 auto; 
-            width: 35px; height: 35px;
-            display: flex; justify-content: center; align-items: center;
-            background: #f1f2f6; color: #636e72;
-            border-radius: 8px; /* Дөңгелекті сәл тікбұрыш қылдым, жинақы болу үшін */
-            font-weight: 600; font-size: 0.85rem;
-            cursor: pointer; transition: all 0.2s;
-            border: 2px solid transparent;
-        }
-        
-        .nav-item.answered {
-            background: var(--primary); color: white;
-            box-shadow: 0 2px 5px rgba(78, 84, 200, 0.4);
-        }
-        
-        .nav-item.missed {
-            border-color: var(--danger); color: var(--danger); background: #fff;
-        }
-
-        /* --- НЕГІЗГІ КОНТЕЙНЕР --- */
-        .container { max-width: 700px; margin: 20px auto; padding: 0 15px; }
-
-        .card {
-            background: var(--white); padding: 25px;
-            border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            text-align: center; margin-top: 40px;
-        }
-
-        /* КІРУ ӨРІСТЕРІ */
-        input[type="text"], input[type="password"] {
-            width: 100%; padding: 15px; margin: 10px 0;
-            border: 2px solid #eee; border-radius: 12px;
-            font-size: 16px; outline: none; box-sizing: border-box;
-        }
+        /* --- CONTENT --- */
+        .container { max-width: 700px; margin: 20px auto; padding: 0 15px; flex: 1; width: 100%; box-sizing: border-box; }
+        .card { background: var(--white); padding: 25px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); text-align: center; margin-top: 40px; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #eee; border-radius: 12px; font-size: 16px; outline: none; box-sizing: border-box; }
         input:focus { border-color: var(--secondary); }
-
-        .btn {
-            width: 100%; padding: 16px; margin-top: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white; border: none; border-radius: 12px;
-            font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
+        .btn { width: 100%; padding: 16px; margin-top: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3); }
 
-        /* СҰРАҚТАР ДИЗАЙНЫ */
-        .question-card {
-            background: var(--white); padding: 20px;
-            border-radius: 15px; margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
-            border: 1px solid #eee; 
-            /* Sticky Header биіктігін ескеру */
-            scroll-margin-top: 180px; 
-        }
+        .question-card { background: var(--white); padding: 20px; border-radius: 15px; margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eee; scroll-margin-top: 180px; }
         .q-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; line-height: 1.5; }
-
-        /* ЖАУАПТАР (Сол жаққа) */
-        .option-label {
-            display: flex; flex-direction: row; justify-content: flex-start;
-            align-items: center; width: 100%; padding: 15px; margin: 10px 0;
-            background: #f8f9fa; border: 2px solid transparent; border-radius: 12px;
-            cursor: pointer; transition: all 0.2s ease; box-sizing: border-box;
-        }
+        .option-label { display: flex; flex-direction: row; justify-content: flex-start; align-items: center; width: 100%; padding: 15px; margin: 10px 0; background: #f8f9fa; border: 2px solid transparent; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; box-sizing: border-box; }
         .option-label:hover { background: #eef0ff; border-color: #dbe0ff; }
-        .option-label:has(input:checked) {
-            background: #eef0ff; border-color: var(--primary);
-            box-shadow: 0 4px 10px rgba(78, 84, 200, 0.15);
-        }
-
-        input[type="radio"] {
-            margin: 0 15px 0 0; width: 20px; height: 20px;
-            accent-color: var(--primary); flex-shrink: 0; cursor: pointer;
-        }
+        .option-label:has(input:checked) { background: #eef0ff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(78, 84, 200, 0.15); }
+        input[type="radio"] { margin: 0 15px 0 0; width: 20px; height: 20px; accent-color: var(--primary); flex-shrink: 0; cursor: pointer; }
         .option-text { text-align: left; font-weight: 500; line-height: 1.4; color: #444; width: 100%; }
         .option-label:has(input:checked) .option-text { color: var(--primary); font-weight: 600; }
 
-        /* ҚОСЫМША */
+        /* --- ҚАТЕМЕН ЖҰМЫС (REVIEW) СТИЛЬДЕРІ --- */
+        .review-card {
+            text-align: left;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 5px solid #ccc;
+            background: #fdfdfd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .review-correct { border-left-color: var(--success); background: #eaffe9; }
+        .review-wrong { border-left-color: var(--danger); background: #fff5f5; }
+        
+        .review-q-title { font-weight: bold; margin-bottom: 10px; display: block; }
+        .review-ans { font-size: 0.9rem; margin: 5px 0; }
+        .ans-user { color: #555; }
+        .ans-right { color: var(--success); font-weight: bold; }
+        .ans-wrong-text { color: var(--danger); text-decoration: line-through; }
+
+        /* --- FOOTER --- */
+        .footer { text-align: center; padding: 20px; color: #a4b0be; font-size: 0.9rem; font-weight: 600; margin-top: 30px; letter-spacing: 1px; text-transform: uppercase; }
+        .footer span { color: var(--primary); }
+
         .hidden { display: none !important; }
-        .loading-spinner {
-            width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary);
-            border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto;
-        }
+        .loading-spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .toast {
-            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            background: #333; color: white; padding: 12px 25px; border-radius: 50px;
-            z-index: 2000; transition: top 0.5s; font-size: 0.9rem; width: max-content;
-        }
+        .toast { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 12px 25px; border-radius: 50px; z-index: 2000; transition: top 0.5s; font-size: 0.9rem; width: max-content; }
         .toast-show { top: 150px; }
     </style>
 </head>
@@ -179,9 +100,7 @@
             <div id="user-display" style="font-weight:700; color:#555; font-size: 0.9rem;">Студент</div>
             <div id="timer-display" class="timer-box">00:00</div>
         </div>
-        <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
-        </div>
+        <div class="progress-container"><div id="progress-bar" class="progress-bar"></div></div>
         <div id="nav-scroller" class="nav-scroller"></div>
     </div>
 
@@ -190,7 +109,7 @@
             <h2 style="color:var(--primary); margin-top:0;">TEST PLATFORM</h2>
             <input type="text" id="loginUser" placeholder="Логин">
             <input type="password" id="loginPass" placeholder="Құпия сөз">
-            <p id="login-msg" style="color:red;"></p>
+            <p id="login-msg" style="color:red; margin-bottom:10px;"></p>
             <button onclick="attemptLogin()" class="btn">Тестті бастау</button>
         </div>
 
@@ -207,16 +126,22 @@
         <div id="result-section" class="card hidden">
             <h2 style="color:#28a745;">Тест аяқталды!</h2>
             <div id="result-score" style="font-size:3.5em; font-weight:bold; color:var(--primary); margin:20px 0;">0/0</div>
-            <p style="color:#666;">Нәтиже жүйеге сақталды.</p>
+            <p style="color:#666; margin-bottom: 30px;">Нәтиже жүйеге сақталды.</p>
+            
+            <h3 style="text-align:left; color:#333; margin-bottom:15px;">Қатемен жұмыс:</h3>
+            <div id="review-container"></div>
+            
+            <button onclick="location.reload()" class="btn" style="background:#555;">Шығу</button>
         </div>
     </div>
 
-    <script>
-        // --- БАПТАУЛАР ---
-        const API_URL = "https://script.google.com/macros/s/AKfycbwM_v8fH9yWE6tNBLLMvqs_WsdzoVNpXB_aX7J9Ba5CRG4VyQSiRlmPx1t2YWxGXSBFaA/exec"; 
-        const TEST_DURATION_MINUTES = 50; 
-        // ------------------
+    <div class="footer">Created by <span>Daulet</span></div>
 
+    <script>
+        // --- СІЛТЕМЕНІ АУЫСТЫРЫҢЫЗ ---
+        const API_URL = "https://script.google.com/macros/s/AKfycbw9WA8NN5NdSDV3jdLR5iYdIdGbjX3MZYbjJ4wY5zwxI3hcCL8WSa4MibJsUkqu-e_3/exec"; 
+        const TEST_DURATION_MINUTES = 45; 
+        
         let currentUser = {};
         let questions = [];
         let timerInterval;
@@ -268,7 +193,6 @@
             document.getElementById('quiz-section').classList.remove('hidden');
             document.getElementById('sticky-header').classList.remove('hidden');
             document.getElementById('user-display').innerText = currentUser.fullname;
-            
             renderQuestions();
             renderNavigator(); 
             startTimer(TEST_DURATION_MINUTES * 60);
@@ -306,8 +230,6 @@
             const navItem = document.getElementById(`nav-item-${index}`);
             navItem.classList.add('answered');
             navItem.classList.remove('missed');
-
-            // Навигаторда сол санға scroll жасау (тігінен немесе көлденең)
             navItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
 
             const total = questions.length;
@@ -319,15 +241,10 @@
         function scrollToQuestion(index) {
             const el = document.getElementById(`q-card-${index}`);
             if(el) {
-                // Header биіктігіне байланысты offset
                 const headerOffset = 180; 
                 const elementPosition = el.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-            
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
             }
         }
 
@@ -359,27 +276,45 @@
                 });
 
                 if(unansweredIndices.length > 0) {
-                    unansweredIndices.forEach(idx => {
-                        document.getElementById(`nav-item-${idx}`).classList.add('missed');
-                    });
-                    
+                    unansweredIndices.forEach(idx => { document.getElementById(`nav-item-${idx}`).classList.add('missed'); });
                     scrollToQuestion(unansweredIndices[0]);
-                    
                     showToast(`Сіз ${unansweredIndices.length} сұрақты белгілемедіңіз!`);
-                    
                     if(!confirm("Кейбір сұрақтар жауапсыз қалды. Дегенмен аяқтай бересіз бе?")) return;
                 } else {
                     if(!confirm("Аяқтауға сенімдісіз бе?")) return;
                 }
             }
-
             clearInterval(timerInterval);
 
             let score = 0;
+            let reviewHtml = ""; // Қатемен жұмыс HTML жинақтау
+
             questions.forEach((q, index) => {
                 const sel = document.querySelector(`input[name="q${index}"]:checked`);
-                if(sel && parseInt(sel.value) === q.a) score++;
+                let userVal = sel ? parseInt(sel.value) : -1;
+                
+                // Егер жауап дұрыс болса
+                if(userVal === q.a) {
+                    score++;
+                    reviewHtml += `
+                    <div class="review-card review-correct">
+                        <span class="review-q-title">${index + 1}. ${q.q}</span>
+                        <div class="review-ans ans-right">✅ Сіздің жауабыңыз: ${q.options[userVal]} (Дұрыс)</div>
+                    </div>`;
+                } else {
+                    // Егер жауап қате немесе белгіленбесе
+                    let userText = userVal !== -1 ? `<span class="ans-wrong-text">${q.options[userVal]}</span>` : "Белгіленбеген";
+                    reviewHtml += `
+                    <div class="review-card review-wrong">
+                        <span class="review-q-title">${index + 1}. ${q.q}</span>
+                        <div class="review-ans ans-user">❌ Сіздің жауабыңыз: ${userText}</div>
+                        <div class="review-ans ans-right">✅ Дұрыс жауап: ${q.options[q.a]}</div>
+                    </div>`;
+                }
             });
+
+            // Қатемен жұмысты экранға шығару
+            document.getElementById('review-container').innerHTML = reviewHtml;
 
             document.getElementById('quiz-section').classList.add('hidden');
             document.getElementById('sticky-header').classList.add('hidden');
@@ -406,5 +341,4 @@
         }
     </script>
 </body>
-
 </html>
